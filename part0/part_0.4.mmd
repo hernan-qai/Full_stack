@@ -1,0 +1,58 @@
+sequenceDiagram
+    participant browser
+    participant server
+    
+    browser->>server: https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->>browser: HTML document
+    deactivate server
+
+    browser->>server: https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: the css file
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->>browser: the JavaScript file
+    deactivate server
+
+    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server, let see it how it works
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: {content: "Buenos dias", date: "2025-04-30T21:25:08.539Z"}
+    deactivate server
+
+    Note right of browser: The browser executes the callback function that renders the notes
+
+    browser->>server: POST  https://studies.cs.helsinki.fi/exampleapp/new_note
+    activate server
+    server-->>browser: The server responds with a 302 redirect to the notes page. 
+    deactivate server
+
+    Note right of browser: The browser follows the redirect and fetches the notes page again.  
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->>browser: HTML document
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: the css file
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->>browser: the JavaScript file
+    deactivate server
+
+    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server, let see it how it works
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: {content: "Hagalo", date: "2025-04-30T21:35:18.227Z"} 
+    deactivate server
+
+    Note right of browser: The browser executes the callback function that renders the notes.
